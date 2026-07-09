@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelos Pedagógicos</title>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f8;
+        color: #081d57;
+        min-height: 100vh;
+    }
+
+    header {
+        background: #12045f;
+        color: white;
+        text-align: center;
+        padding: 20px 20px 20px;
+        position: relative;
+    }
+
+    .logo {
+        position: absolute;
+        top: 12px;
+        left: 20px;
+        height: 60px;
+        width: auto;
+    }
+
+    @media (max-width: 480px) {
+        .logo {
+            position: static;
+            display: block;
+            margin: 0 auto 10px;
+        }
+    }
+
+    header h1 {
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        color: #bdc3c7;
+        font-size: 14px;
+    }
+
+    /* Barra de pestañas */
+    nav.tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background: #34495e;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    nav.tabs button {
+        flex: 1;
+        min-width: 120px;
+        padding: 16px 10px;
+        background: none;
+        border: none;
+        color: #ecf0f1;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background 0.25s ease;
+        border-bottom: 3px solid transparent;
+    }
+
+    nav.tabs button:hover {
+        background: #3d566e;
+    }
+
+    nav.tabs button.active {
+        background: #1f10f7;
+        border-bottom: 3px solid #16a085;
+        font-weight: bold;
+    }
+
+    .autoplay-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: #ecf0f1;
+        padding: 8px 15px;
+    }
+
+    #autoplayBtn {
+        background: #1f10f7;
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    #autoplayBtn:hover {
+        background: #16a085;
+    }
+
+    #autoplayBtn.off {
+        background: #95a5a6;
+    }
+
+    .progress-track {
+        width: 160px;
+        height: 6px;
+        background: #dfe6e9;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: #1f10f7;
+        border-radius: 4px;
+    }
+
+    .progress-fill.animating {
+        transition: width 5s linear;
+        width: 100%;
+    }
+
+    main {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 0 20px 40px;
+    }
+
+    .panel {
+        display: none;
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        animation: fadeIn 0.4s ease;
+    }
+
+    .panel.active {
+        display: block;
+    }
+
+    .panel h2 {
+        color: #1f10f7;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ecf0f1;
+        padding-bottom: 10px;
+    }
+
+    .panel h3 {
+        color: #34495e;
+        margin: 20px 0 8px;
+        font-size: 17px;
+    }
+
+    .panel p strong {
+        color: #1f10f7;
+    }
+
+    .panel p {
+        line-height: 1.7;
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+
+    .panel ul {
+        margin: 10px 0 10px 25px;
+        line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #7f8c8d;
+        font-size: 13px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo Maestros Conectados" class="logo">
+    <h1>Modelos Pedagógicos</h1>
+    <p>Haz clic en una sección para ver la información</p>
+</header>
+
+<nav class="tabs">
+    <button class="tab-btn active" onclick="mostrarPanel('tema1', this)">Introducción</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema2', this)">Tradicional</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema3', this)">Conductista</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema4', this)">Constructivista</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema5', this)">Crítico-Social</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema6', this)">Montessori</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema7', this)">Waldorf</button>
+    <button class="tab-btn" onclick="mostrarPanel('tema8', this)">Conclusiones</button>
+</nav>
+
+<div class="autoplay-bar">
+    <button id="autoplayBtn" onclick="toggleAutoplay()">⏸ Auto-avance: ON</button>
+    <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<main>
+    <section id="tema1" class="panel active">
+        <h2>Introducción</h2>
+        <p>Un modelo pedagógico es la forma en que se organiza y orienta el proceso de enseñanza-aprendizaje: qué papel tiene el docente, qué papel tiene el estudiante y cómo se construye el conocimiento en el aula.</p>
+        <p>A lo largo de la historia han surgido distintos modelos para responder a las necesidades de cada época: el <strong>Tradicional</strong>, el <strong>Conductista</strong>, el <strong>Constructivista</strong>, el <strong>Crítico-Social</strong>, el <strong>Montessori</strong> y el <strong>Waldorf</strong>. En las siguientes pestañas encontrarás, para cada uno, qué es, cómo se usa en el aula (con ejemplo, ventaja y limitación) y quién lo creó.</p>
+    </section>
+
+    <section id="tema2" class="panel">
+        <h2>Modelo Tradicional</h2>
+        <p>Se centra en la transmisión de conocimientos desde el docente hacia los estudiantes. Sus características principales son la clase magistral, la memorización, la disciplina y el rol del profesor como autoridad. Se aplica en contextos donde se requiere orden, control y uniformidad, como en grupos grandes o instituciones con estructuras rígidas.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>El profesor transmite la información de manera directa, los estudiantes escuchan, toman apuntes y luego la reproducen en evaluaciones.</p>
+        <p><strong>Ejemplo:</strong> En una clase de historia, el docente explica la independencia de Colombia con fechas y personajes clave. Los estudiantes memorizan y luego presentan un examen escrito.</p>
+        <p><strong>Ventaja:</strong> Sirve para organizar y dar estructura a temas amplios.</p>
+        <p><strong>Limitación:</strong> Los estudiantes participan poco y se fomenta más la memoria que la comprensión.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> Antigüedad clásica (Grecia y Roma), consolidado en la Edad Media con la educación religiosa.</p>
+        <p><strong>Creadores/Influencias:</strong> Sócrates, Platón y Aristóteles en la filosofía; luego la Iglesia medieval.</p>
+        <p><strong>Época:</strong> Desde el siglo V a.C. hasta la Edad Media (siglo XII-XV).</p>
+        <p><strong>Por qué:</strong> Se buscaba transmitir conocimientos y valores de forma ordenada y uniforme.</p>
+        <p><strong>Cómo:</strong> El maestro como autoridad que dicta y el alumno como receptor pasivo.</p>
+    </section>
+
+    <section id="tema3" class="panel">
+        <h2>Modelo Conductista</h2>
+        <p>Se basa en la teoría del estímulo-respuesta, donde el aprendizaje ocurre a través de refuerzos positivos o negativos. Sus características incluyen la repetición, la práctica constante y el uso de recompensas o sanciones. Se aplica en la enseñanza de hábitos, destrezas básicas o entrenamientos técnicos, donde la precisión y la automatización son esenciales.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>Se repite una acción hasta que se logra, reforzando con premios o correcciones.</p>
+        <p><strong>Ejemplo:</strong> En primaria, cuando los niños aprenden a multiplicar, se les da una estrella cada vez que resuelven bien una operación. Si se equivocan, repiten hasta hacerlo correctamente.</p>
+        <p><strong>Ventaja:</strong> Muy útil para enseñar hábitos, destrezas básicas o entrenamientos técnicos.</p>
+        <p><strong>Limitación:</strong> Puede volverse mecánico y poco creativo.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> Principios del siglo XX.</p>
+        <p><strong>Creadores:</strong> John B. Watson (1913, "conductismo") y B.F. Skinner (años 1930-50, "condicionamiento operante").</p>
+        <p><strong>Por qué:</strong> Explicar el aprendizaje como resultado de estímulos y respuestas observables.</p>
+        <p><strong>Cómo:</strong> Repetición, refuerzos positivos y negativos, programas de enseñanza programada.</p>
+    </section>
+
+    <section id="tema4" class="panel">
+        <h2>Modelo Constructivista</h2>
+        <p>Considera que el estudiante construye activamente su conocimiento a partir de experiencias previas y nuevas interacciones. Sus características son el aprendizaje significativo, la participación activa y el rol del docente como guía. Se aplica en contextos donde se busca desarrollar competencias, pensamiento crítico y creatividad, especialmente en proyectos escolares y actividades colaborativas.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>Los estudiantes aprenden relacionando lo nuevo con lo que ya saben, construyendo su propio conocimiento.</p>
+        <p><strong>Ejemplo:</strong> En ciencias naturales, los alumnos siembran semillas y observan cómo crecen. A partir de esa experiencia, comprenden el ciclo de vida de las plantas.</p>
+        <p><strong>Ventaja:</strong> Favorece el pensamiento crítico, la creatividad y el aprendizaje significativo.</p>
+        <p><strong>Limitación:</strong> Requiere más tiempo y preparación del docente.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> Mediados del siglo XX.</p>
+        <p><strong>Creadores:</strong> Jean Piaget (teoría del desarrollo cognitivo, 1936-1950) y Lev Vygotsky (zona de desarrollo próximo, años 1930).</p>
+        <p><strong>Por qué:</strong> El aprendizaje ocurre cuando el estudiante construye activamente el conocimiento.</p>
+        <p><strong>Cómo:</strong> Experiencias, proyectos, interacción social, conexión con saberes previos.</p>
+    </section>
+
+    <section id="tema5" class="panel">
+        <h2>Modelo Crítico-Social</h2>
+        <p>Entiende la educación como una herramienta de transformación social y de formación de ciudadanos conscientes. Sus características son la reflexión crítica, el análisis de la realidad y la búsqueda de justicia social. Se aplica en escenarios comunitarios, educación popular y colegios con enfoque social, donde se busca que los estudiantes comprendan y cuestionen su entorno.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>Se reflexiona sobre la realidad y se busca transformarla con proyectos y debates.</p>
+        <p><strong>Ejemplo:</strong> En una clase de ciudadanía, los estudiantes analizan el problema de la basura en su barrio y organizan una campaña de reciclaje.</p>
+        <p><strong>Ventaja:</strong> Forma ciudadanos conscientes y comprometidos con su entorno.</p>
+        <p><strong>Limitación:</strong> Necesita apoyo comunitario y puede ser difícil de aplicar en todos los contextos escolares.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> Década de 1960-70.</p>
+        <p><strong>Creador principal:</strong> Paulo Freire, con su obra "Pedagogía del oprimido" (1968).</p>
+        <p><strong>Por qué:</strong> Usar la educación como herramienta de liberación y transformación social.</p>
+        <p><strong>Cómo:</strong> Diálogo, reflexión crítica, proyectos comunitarios, educación popular.</p>
+    </section>
+
+    <section id="tema6" class="panel">
+        <h2>Modelo Montessori</h2>
+        <p>Promueve el aprendizaje autónomo y respetuoso del ritmo individual de cada estudiante. Sus características incluyen el uso de materiales manipulativos, ambientes preparados y el rol del docente como observador y guía. Se aplica principalmente en educación inicial y primaria, en espacios pequeños y personalizados.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>Cada niño trabaja a su ritmo con materiales diseñados para descubrir conceptos por sí mismo. El docente observa y guía.</p>
+        <p><strong>Ejemplo:</strong> En preescolar, un niño usa bloques de diferentes tamaños para entender la noción de grande y pequeño, sin que el profesor le dé la respuesta directamente.</p>
+        <p><strong>Ventaja:</strong> Respeta la autonomía y fomenta la curiosidad natural.</p>
+        <p><strong>Limitación:</strong> Requiere ambientes preparados y materiales específicos, no siempre disponibles en todas las escuelas.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> Principios del siglo XX.</p>
+        <p><strong>Creadora:</strong> María Montessori, médica y pedagoga italiana (primeras escuelas en 1907).</p>
+        <p><strong>Por qué:</strong> Respetar el ritmo individual y fomentar la autonomía del niño.</p>
+        <p><strong>Cómo:</strong> Ambientes preparados, materiales sensoriales, aprendizaje autónomo con guía del docente.</p>
+    </section>
+
+    <section id="tema7" class="panel">
+        <h2>Modelo Waldorf</h2>
+        <p>Busca una educación integral que combine arte, creatividad y espiritualidad. Sus características son la narración de historias, el aprendizaje por experiencias y la integración de lo artístico en todas las áreas. Se aplica en escuelas alternativas y proyectos culturales, donde se valora la formación holística del estudiante.</p>
+
+        <h3>Cómo se usa</h3>
+        <p>Se aprende a través del arte, la narración y la experiencia vivencial.</p>
+        <p><strong>Ejemplo:</strong> En primaria, los estudiantes aprenden fracciones cocinando una receta y dividiendo los ingredientes, mientras dibujan o cantan canciones relacionadas.</p>
+        <p><strong>Ventaja:</strong> Desarrolla la creatividad, la imaginación y la conexión emocional con el aprendizaje.</p>
+        <p><strong>Limitación:</strong> Puede ser visto como poco académico en contextos más tradicionales.</p>
+
+        <h3>¿Quién lo creó?</h3>
+        <p><strong>Origen:</strong> 1919, en Alemania.</p>
+        <p><strong>Creador:</strong> Rudolf Steiner, filósofo austríaco, fundador de la antroposofía.</p>
+        <p><strong>Por qué:</strong> Formar integralmente al ser humano, uniendo arte, espiritualidad y conocimiento.</p>
+        <p><strong>Cómo:</strong> Narración de historias, música, teatro, manualidades, experiencias vivenciales.</p>
+    </section>
+
+    <section id="tema8" class="panel">
+        <h2>Conclusiones</h2>
+        <p>Cada modelo pedagógico nació en un momento histórico específico para responder a las necesidades de su época: el <strong>Tradicional</strong> para transmitir saberes, el <strong>Conductista</strong> para entrenar conductas, el <strong>Constructivista</strong> para fomentar la comprensión, el <strong>Crítico-Social</strong> para transformar la sociedad, el <strong>Montessori</strong> para respetar la autonomía infantil y el <strong>Waldorf</strong> para integrar arte y espiritualidad.</p>
+    </section>
+</main>
+
+<footer>
+    Viva Milo j &copy; 2026
+</footer>
+
+<script>
+    const ordenPestanas = ['tema1', 'tema2', 'tema3', 'tema4', 'tema5', 'tema6', 'tema7', 'tema8'];
+    let indiceActual = 0;
+    let autoplayActivo = true;
+    let temporizador = null;
+
+    const progressFill = document.getElementById('progressFill');
+    const autoplayBtn = document.getElementById('autoplayBtn');
+
+    function mostrarPanel(id, btn) {
+        // Ocultar todos los paneles
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        // Quitar clase activa de todos los botones
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+        // Mostrar el panel seleccionado
+        document.getElementById(id).classList.add('active');
+
+        // Si viene de un clic manual, buscar el botón correspondiente
+        if (!btn) {
+            btn = document.querySelectorAll('.tab-btn')[ordenPestanas.indexOf(id)];
+        }
+        btn.classList.add('active');
+
+        // Actualizar el índice actual para que el auto-avance siga desde ahí
+        indiceActual = ordenPestanas.indexOf(id);
+
+        // Reiniciar la barra de progreso si el auto-avance está activo
+        if (autoplayActivo) {
+            reiniciarBarra();
+        }
+    }
+
+    function avanzarPestana() {
+        indiceActual = (indiceActual + 1) % ordenPestanas.length;
+        mostrarPanel(ordenPestanas[indiceActual]);
+    }
+
+    function reiniciarBarra() {
+        progressFill.classList.remove('animating');
+        // Forzar reflow para poder reiniciar la animación
+        void progressFill.offsetWidth;
+        progressFill.classList.add('animating');
+    }
+
+    function iniciarAutoplay() {
+        temporizador = setInterval(avanzarPestana, 5000);
+        reiniciarBarra();
+    }
+
+    function detenerAutoplay() {
+        clearInterval(temporizador);
+        progressFill.classList.remove('animating');
+        progressFill.style.width = '0%';
+    }
+
+    function toggleAutoplay() {
+        autoplayActivo = !autoplayActivo;
+        if (autoplayActivo) {
+            autoplayBtn.textContent = '⏸ Auto-avance: ON';
+            autoplayBtn.classList.remove('off');
+            iniciarAutoplay();
+        } else {
+            autoplayBtn.textContent = '▶ Auto-avance: OFF';
+            autoplayBtn.classList.add('off');
+            detenerAutoplay();
+        }
+    }
+
+
+    iniciarAutoplay();
+</script>
+
+</body>
+</html>
